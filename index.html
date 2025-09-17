@@ -69,12 +69,12 @@ table.comp {
 table.comp th, table.comp td {
   border: 1px solid #ddd;
   padding: 8px 10px;
-  text-align: center;
-  white-space: nowrap; /* keep columns compact */
+  text-align: left; /* ← 左寄せに変更 */
+  white-space: nowrap;
 }
 table.comp th {
   background: #f4f4f4;
-  position: sticky;   /* keep header visible while scrolling horizontally */
+  position: sticky;
   top: 0;
   z-index: 1;
 }
@@ -113,13 +113,13 @@ table.comp tr.ours {
       <td>VC with speech enhancement applied as preprocessing.</td>
     </tr>
     <tr class="ours">
-      <td>EnrollVC (ours)</td>
+      <td>SpkBeamVC (ours)</td>
       <td>✘</td>
       <td>✔︎</td>
-      <td>Proposed method: noise-robust VC using source speaker embedding.</td>
+      <td>Proposed SpeakerBeam-VC: Noise-robust VC with speaker enrollment.</td>
     </tr>
     <tr>
-      <td>SE+EnrollVC</td>
+      <td>SE+SpkBeamVC</td>
       <td>✔︎</td>
       <td>✔︎</td>
       <td>Proposed variant: SE preprocessing combined with enrollment.</td>
