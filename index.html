@@ -45,10 +45,19 @@
 Affiliation: NTT, Inc., Japan</p>
 <h1 id="contents--">Contents  <!-- omit in toc --></h1>
 <ul>
-<li><a href="#comparison-vcs-reference-table-1-in-paper">Comparison VCs (Reference: Table 1 in paper)</a></li>
+<li><a href="#comparison-vcs">Comparison VCs</a></li>
 <li><a href="#speech-samples">Speech samples</a></li>
+<li><a href="#comparison-vcs-1">Comparison VCs</a></li>
+<li><a href="#speech-samples-1">Speech samples</a>
+<ul>
+<li><a href="#female-to-female">Female-to-Female</a></li>
+<li><a href="#male-to-female">Male-to-Female</a></li>
+<li><a href="#male-to-male">Male-to-Male</a></li>
+<li><a href="#female-to-male">Female-to-Male</a></li>
 </ul>
-<h1 id="comparison-vcs-reference-table-1-in-paper">Comparison VCs (Reference: Table 1 in paper)</h1>
+</li>
+</ul>
+<h1 id="comparison-vcs">Comparison VCs</h1>
 <style>
 /* --- Responsive table wrapper --- */
 .table-scroll {
@@ -94,7 +103,7 @@ table.comp tr.ours {
   <thead>
     <tr>
       <th>System</th>
-      <th>SE Preprocessing</th>
+      <th>Speech enhancement <br>(SE) Preprocessing</th>
       <th>Speaker Enrollment</th>
       <th>Description</th>
     </tr>
@@ -128,9 +137,423 @@ table.comp tr.ours {
 </table>
 </div>
 <h1 id="speech-samples">Speech samples</h1>
-<p>If you are having trouble listening to the audios, try refreshing the page.
-All speakers in this page are chosen from unseen test data</p>
-<!-- <audio controls controlslist="nodownload" src="./data/orgwav/FMH.20243Q_interact@10_tsukareta@117-0.wav" preload="metadata"></audio> -->
+<p>If you are having trouble listening to the audios, try refreshing the page.<br>
+All source and target speaker pairs are chosen from unseen test data</p>
+<h1 id="speakerbeam-vc-noise-robust-voice-conversion-with-speaker-enrollment--demos----1">SpeakerBeam-VC: Noise-Robust Voice Conversion with Speaker Enrollment — Demos   <!-- omit in toc --></h1>
+<p>Authors: Hiroki Kanagawa, Yusuke Ijima, Kenichi Fujita, Takafumi Moriya, Taichi Asami<br>
+Affiliation: NTT, Inc., Japan</p>
+<h1 id="contents---1">Contents  <!-- omit in toc --></h1>
+<ul>
+<li><a href="#comparison-vcs">Comparison VCs</a></li>
+<li><a href="#speech-samples">Speech samples</a></li>
+<li><a href="#comparison-vcs-1">Comparison VCs</a></li>
+<li><a href="#speech-samples-1">Speech samples</a>
+<ul>
+<li><a href="#female-to-female">Female-to-Female</a></li>
+<li><a href="#male-to-female">Male-to-Female</a></li>
+<li><a href="#male-to-male">Male-to-Male</a></li>
+<li><a href="#female-to-male">Female-to-Male</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="comparison-vcs-1">Comparison VCs</h1>
+<style>
+/* --- Responsive table wrapper --- */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1em 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+/* --- Base table styles --- */
+table.comp {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  width: 100%;
+  min-width: 720px; /* allow horizontal scroll on small screens */
+}
+table.comp th, table.comp td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left; /* ← 左寄せに変更 */
+  white-space: nowrap;
+}
+table.comp th {
+  background: #f4f4f4;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+table.comp tr.ours {
+  background: #fff9e6; /* Highlight our method in pale yellow */
+  font-weight: 600;
+}
+
+/* --- Small-screen tweaks --- */
+@media (max-width: 640px) {
+  table.comp { font-size: 0.9rem; }
+  table.comp th, table.comp td { padding: 6px 8px; }
+}
+</style>
+<div class="table-scroll">
+<table class="comp">
+  <thead>
+    <tr>
+      <th>System</th>
+      <th>Speech enhancement <br>(SE) Preprocessing</th>
+      <th>Speaker Enrollment</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VanillaVC</td>
+      <td>✘</td>
+      <td>✘</td>
+      <td>Standard VC without SE or enrollment.</td>
+    </tr>
+    <tr>
+      <td>SE+VC</td>
+      <td>✔︎</td>
+      <td>✘</td>
+      <td>VC with speech enhancement applied as preprocessing.</td>
+    </tr>
+    <tr class="ours">
+      <td>SpkBeamVC (ours)</td>
+      <td>✘</td>
+      <td>✔︎</td>
+      <td>Proposed SpeakerBeam-VC: Noise-robust VC with speaker enrollment.</td>
+    </tr>
+    <tr>
+      <td>SE+SpkBeamVC</td>
+      <td>✔︎</td>
+      <td>✔︎</td>
+      <td>Proposed variant: SE preprocessing combined with enrollment.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h1 id="speech-samples-1">Speech samples</h1>
+<p>If you are having trouble listening to the audios, try refreshing the page.<br>
+All source and target speaker pairs are chosen from unseen test data</p>
+<h2 id="female-to-female">Female-to-Female</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">SNR</th>
+<th style="text-align:left">Mode</th>
+<th style="text-align:left">VanillaVC</th>
+<th style="text-align:left">SE+VC</th>
+<th style="text-align:left">SpkBeamVC</th>
+<th style="text-align:left">SE+SpkBeamVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+</tbody>
+</table>
+<h2 id="male-to-female">Male-to-Female</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">SNR</th>
+<th style="text-align:left">Mode</th>
+<th style="text-align:left">VanillaVC</th>
+<th style="text-align:left">SE+VC</th>
+<th style="text-align:left">SpkBeamVC</th>
+<th style="text-align:left">SE+SpkBeamVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+</tbody>
+</table>
+<h2 id="male-to-male">Male-to-Male</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">SNR</th>
+<th style="text-align:left">Mode</th>
+<th style="text-align:left">VanillaVC</th>
+<th style="text-align:left">SE+VC</th>
+<th style="text-align:left">SpkBeamVC</th>
+<th style="text-align:left">SE+SpkBeamVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+</tbody>
+</table>
+<h2 id="female-to-male">Female-to-Male</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">SNR</th>
+<th style="text-align:left">Mode</th>
+<th style="text-align:left">VanillaVC</th>
+<th style="text-align:left">SE+VC</th>
+<th style="text-align:left">SpkBeamVC</th>
+<th style="text-align:left">SE+SpkBeamVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">inf</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Offline</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Stream</td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+</tr>
+</tbody>
+</table>
 
         
         
