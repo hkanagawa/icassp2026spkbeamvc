@@ -43,45 +43,41 @@
         <h1 id="speakerbeam-vc-noise-robust-voice-conversion-with-speaker-enrollment--demos---">SpeakerBeam-VC: Noise-Robust Voice Conversion with Speaker Enrollment — Demos   <!-- omit in toc --></h1>
 <p>Authors: Hiroki Kanagawa, Yusuke Ijima, Kenichi Fujita, Takafumi Moriya, Taichi Asami<br>
 Affiliation: NTT, Inc., Japan</p>
+<img src="file:////home/kanagawa/work/study/2022/speech-t_/icassp2026_noise_robustvc/demopage/proposed.png" width="25%">
 <h1 id="comparison-vcs">Comparison VCs</h1>
 <style>
-/* --- Responsive table wrapper --- */
-.table-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 1em 0;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-}
-
-/* --- Base table styles --- */
 table.comp {
   border-collapse: collapse;
   font-size: 0.95rem;
-  width: 100%;
-  min-width: 720px; /* allow horizontal scroll on small screens */
+  width: 50%;
+  table-layout: fixed;   /* 列幅を固定レイアウトにする */
 }
 table.comp th, table.comp td {
   border: 1px solid #ddd;
-  padding: 8px 10px;
-  text-align: left; /* ← 左寄せに変更 */
-  white-space: nowrap;
-}
-table.comp th {
-  background: #f4f4f4;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-table.comp tr.ours {
-  background: #fff9e6; /* Highlight our method in pale yellow */
-  font-weight: 600;
+  padding: 2px 4px;
+  text-align: left;
+  line-height: 1.3;
+  vertical-align: top;
+  word-wrap: break-word; /* 長文をセル内で折り返す */
 }
 
-/* --- Small-screen tweaks --- */
-@media (max-width: 640px) {
-  table.comp { font-size: 0.9rem; }
-  table.comp th, table.comp td { padding: 6px 8px; }
+/* 列幅指定 */
+table.comp th:nth-child(1),
+table.comp td:nth-child(1) { width: 15%; }   /* System */
+table.comp th:nth-child(2),
+table.comp td:nth-child(2) { width: 15%; }   /* SE Preprocessing */
+table.comp th:nth-child(3),
+table.comp td:nth-child(3) { width: 20%; }   /* Speaker Enrollment */
+table.comp th:nth-child(4),
+table.comp td:nth-child(4) { width: 50%; }   /* Description */
+
+/* ヘッダーとハイライト */
+table.comp th {
+  background: #f4f4f4;
+}
+table.comp tr.ours {
+  background: #fff9e6;
+  font-weight: 600;
 }
 </style>
 <div class="table-scroll">
@@ -89,8 +85,8 @@ table.comp tr.ours {
   <thead>
     <tr>
       <th>System</th>
-      <th>Speech enhancement <br>(SE) Preprocessing</th>
-      <th>Speaker Enrollment</th>
+      <th>Speech enhancement (SE)<br>preprocessing before VC</th>
+      <th>Use speaker Enrollment<br>for content encoder</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -123,85 +119,112 @@ table.comp tr.ours {
 </table>
 </div>
 <h1 id="speech-samples">Speech samples</h1>
-<p>If you are having trouble listening to the audios, try refreshing the page.<br>
-All source and target speaker pairs are chosen from unseen test data.<br>
-Each audio sample is spoken in Japanese with the utterance “ずいぶんの情熱とエネルギーをもって勉強され研究された.” (in English as “It was studied and researched with considerable passion and energy.”)</p>
+<ul>
+<li>If you are having trouble listening to the audios, try refreshing the page.</li>
+<li>All source and target speaker pairs are chosen from <strong>unseen</strong> test data.</li>
+<li>Each audio sample is spoken in Japanese with the utterance “ずいぶんの情熱とエネルギーをもって勉強され研究された.”<br>
+(in English as “It was studied and researched with considerable passion and energy.”)</li>
+</ul>
 <h2 id="female-to-female">Female-to-Female</h2>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">SNR</th>
+<th style="text-align:left">Method</th>
 <th style="text-align:left">Mode</th>
-<th style="text-align:left">VanillaVC</th>
-<th style="text-align:left">SE+VC</th>
-<th style="text-align:left">SpkBeamVC</th>
-<th style="text-align:left">SE+SpkBeamVC</th>
+<th style="text-align:left">SNR=∞</th>
+<th style="text-align:left">20dB</th>
+<th style="text-align:left">10dB</th>
+<th style="text-align:left">5dB</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left">Reference) <br>Noisy source speaker's speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Source speaker's speech enhanced by SE</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Target speaker's groud-truth clean speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/tgt_gt__BAN@1.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VanillaVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left">SE+VC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left">SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left">SE+SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 </tbody>
 </table>
@@ -209,78 +232,102 @@ Each audio sample is spoken in Japanese with the utterance “ずいぶんの情
 <table>
 <thead>
 <tr>
-<th style="text-align:left">SNR</th>
+<th style="text-align:left">Method</th>
 <th style="text-align:left">Mode</th>
-<th style="text-align:left">VanillaVC</th>
-<th style="text-align:left">SE+VC</th>
-<th style="text-align:left">SpkBeamVC</th>
-<th style="text-align:left">SE+SpkBeamVC</th>
+<th style="text-align:left">SNR=∞</th>
+<th style="text-align:left">20dB</th>
+<th style="text-align:left">10dB</th>
+<th style="text-align:left">5dB</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left">Reference) <br>Noisy source speaker's speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Source speaker's speech enhanced by SE</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Target speaker's groud-truth clean speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/tgt_gt__BAN@1.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VanillaVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left">SE+VC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left">SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left">SE+SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2female@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2female@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 </tbody>
 </table>
@@ -288,78 +335,102 @@ Each audio sample is spoken in Japanese with the utterance “ずいぶんの情
 <table>
 <thead>
 <tr>
-<th style="text-align:left">SNR</th>
+<th style="text-align:left">Method</th>
 <th style="text-align:left">Mode</th>
-<th style="text-align:left">VanillaVC</th>
-<th style="text-align:left">SE+VC</th>
-<th style="text-align:left">SpkBeamVC</th>
-<th style="text-align:left">SE+SpkBeamVC</th>
+<th style="text-align:left">SNR=∞</th>
+<th style="text-align:left">20dB</th>
+<th style="text-align:left">10dB</th>
+<th style="text-align:left">5dB</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left">Reference) <br>Noisy source speaker's speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__MIZUNO@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Source speaker's speech enhanced by SE</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__MIZUNO@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Target speaker's groud-truth clean speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/tgt_gt__M01@1.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VanillaVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left">SE+VC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left">SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left">SE+SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__male2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 </tbody>
 </table>
@@ -367,78 +438,102 @@ Each audio sample is spoken in Japanese with the utterance “ずいぶんの情
 <table>
 <thead>
 <tr>
-<th style="text-align:left">SNR</th>
+<th style="text-align:left">Method</th>
 <th style="text-align:left">Mode</th>
-<th style="text-align:left">VanillaVC</th>
-<th style="text-align:left">SE+VC</th>
-<th style="text-align:left">SpkBeamVC</th>
-<th style="text-align:left">SE+SpkBeamVC</th>
+<th style="text-align:left">SNR=∞</th>
+<th style="text-align:left">20dB</th>
+<th style="text-align:left">10dB</th>
+<th style="text-align:left">5dB</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left">Reference) <br>Noisy source speaker's speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_noisy__F01@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Source speaker's speech enhanced by SE</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/src_enhanced__F01@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+</tr>
+<tr>
+<td style="text-align:left">Reference) <br>Target speaker's groud-truth clean speech</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"><button data-src="wav/tgt_gt__M01@1.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VanillaVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">inf</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left">SE+VC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">20</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left">SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">10</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left">SE+SpkBeamVC</td>
 <td style="text-align:left">Offline</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.offline__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 <tr>
-<td style="text-align:left">5</td>
+<td style="text-align:left"></td>
 <td style="text-align:left">Stream</td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/vanillavc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_vc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
-<td style="text-align:left"><audio controls controlslist="nodownload" src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" preload="metadata"></audio></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2male@1__NR@NO_NOISE@infdB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@20dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@10dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
+<td style="text-align:left"><button data-src="wav/se_spkbeamvc.stream__female2male@1__NR@SE_RESTAURANT@5dB.wav" onclick="new Audio(this.dataset.src).play()">▶</button></td>
 </tr>
 </tbody>
 </table>
